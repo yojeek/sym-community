@@ -3,9 +3,9 @@
 .DS_Store
 *config.php
 .htaccess
-workspace/
 manifest/
 *.esproj
 *~
 *.geany
 install-log.txt
+.idea/
