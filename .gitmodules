@@ -26,5 +26,8 @@
 	path = extensions/members
 	url = https://github.com/symphonycms/members.git
 [submodule "extensions/etm"]
-	path = extensions/etm
+	path = extensions/email_template_manager
 	url = https://github.com/creativedutchmen/email_template_manager.git
+[submodule "workspace/utilities/members-forms"]
+	path = workspace/utilities/members-forms
+	url = https://github.com/michael-e/members-forms.git
