@@ -10,9 +10,12 @@
 
 <xsl:import href="navigation.xsl"/>
 <xsl:import href="side-common.xsl"/>
+<xsl:import href="xml-to-string.xsl"/>
+
+<xsl:variable name="member-is-logged-in" select="boolean(//events/member-login-info/@logged-in = 'yes')"/>
 
 <xsl:output encoding="UTF-8" 
-            indent="yes" 
+            indent="yes"
             method="html" 
             media-type="text/html" 
             omit-xml-declaration="yes" />
@@ -43,21 +46,27 @@
 
       <!-- CSS : implied media="all" -->
       <link rel="stylesheet" href="{$workspace}/css/960_12_col.css"/>
+      <link rel="stylesheet" href="{$workspace}/css/markitup.css"/>
       <link rel="stylesheet" href="{$workspace}/css/style.css"/>
 
       <!-- Uncomment if you are specifically targeting less enabled mobile browsers
       <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
 
       <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-      <script src="js/libs/modernizr-1.6.min.js"/>
-
+      <!--<script src="js/libs/modernizr-1.6.min.js"/>-->
+        <script type="text/javascript">
+            // define namespace
+            var app = {};
+            // templates will register themselves in this object
+            app.templates = {};
+        </script>
     </head>
 
     <body>
         <div class="container_12">
             <header class="grid_12">
                 <div class="grid_3 alpha">
-                    <a href="/"><img src="{$workspace}/img/logo.png" alt="logo" /></a>
+                    <a href="/" tabindex="1"><img src="{$workspace}/img/logo.png" alt="logo" /></a>
                 </div>
                 <nav id="nav-main" class="grid_5">                         
                     <div class="grid_1 alpha">
@@ -90,16 +99,28 @@
                         </ul>                                    
                 </nav>        
             </footer>
+
+            <!-- debugging stuff -->
+            <div class="debug">
+            <p>XML tree:</p>
+            <pre><code>
+                <xsl:call-template name="xml-to-string">
+                    <xsl:with-param name="node-set" select="."/>
+                </xsl:call-template>
+            </code></pre>
+            </div>
+
         </div>      
      
       <!-- JavaScript at the bottom for fast page loading -->
 
       <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js"/>
-      <script><![CDATA[!window.jQuery && document.write(unescape('%3Cscript src="./workspace/js/libs/jquery-1.6.2.js"%3E%3C/script%3E'))]]></script>
+      <script><![CDATA[!window.jQuery && document.write(unescape('%3Cscript src="/workspace/js/libs/jquery-1.6.2.js"%3E%3C/script%3E'))]]></script>
 
       <!-- scripts concatenated and minified via ant build script-->
         <script src="{$workspace}/js/script.js"/>
+        <script src="{$workspace}/js/jquery.markitup.js"/>
       <!-- end scripts-->
 
 

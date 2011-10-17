@@ -7,7 +7,8 @@
 		const ROOTELEMENT = 'members-new';
 
 		public $eParamFILTERS = array(
-			'member-lock-activation'
+			'member-lock-activation',
+				'etm-send-activation-code'
 		);
 
 		public static function about(){
@@ -18,7 +19,7 @@
 					'website' => 'http://sym-community.local',
 					'email' => 'antiplaka@gmail.com'),
 				'version' => '1.0',
-				'release-date' => '2011-09-28T19:11:44+00:00',
+				'release-date' => '2011-09-30T06:30:33+00:00',
 				'trigger-condition' => 'action[members-new]'
 			);
 		}
@@ -55,6 +56,9 @@
         <p>This is an example of the form markup you can use on your frontend:</p>
         <pre class="XML"><code>&lt;form method="post" action="" enctype="multipart/form-data">
   &lt;input name="MAX_FILE_SIZE" type="hidden" value="5242880" />
+  &lt;label>Username
+    &lt;input name="fields[username]" type="text" />
+  &lt;/label>
   &lt;label>Email
     &lt;input name="fields[email]" type="text" />
   &lt;/label>

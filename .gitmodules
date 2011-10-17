@@ -30,4 +30,4 @@
 	url = https://github.com/creativedutchmen/email_template_manager.git
 [submodule "workspace/utilities/members-forms"]
 	path = workspace/utilities/members-forms
-	url = https://github.com/michael-e/members-forms.git
+	url = git@github.com:yojeek/members-forms.git

@@ -13,7 +13,7 @@
 			the highest priority!
 		-->
 		<security>
-			<use-password-postback>false</use-password-postback>
+			<use-password-postback>true</use-password-postback>
 		</security>
 
 		<!--
@@ -32,13 +32,13 @@
 			<field type="identity" link="email"/>
 
 			<field type="username" handle="username">
-				<label>Username</label>
+				<label>Display name</label>
 				<errors>
-					<username type="missing" message="USERNAME is a required field."/>
-					<username type="invalid" message="USERNAME contains invalid characters.">The username is invalid. It must be at least 4 characters.</username>
-					<username type="invalid" message="USERNAME is already taken."/>
+					<username type="missing" message="'Username' is a required field.">Display name is a required field.</username>
+					<username type="invalid" message="'Username' contains invalid characters.">The username is invalid. It must be at least 4 characters.</username>
+					<username type="invalid" message="'Username' is already taken."/>
 					<username type="invalid" message="Member not found."/>
-					<error type="invalid" message="No Identity field found.">'Username' is a required field.</error>
+					<error type="invalid" message="No Identity field found.">Display name is a required field.</error>
 				</errors>
 			</field>
 			<field type="email" handle="email">
@@ -93,6 +93,14 @@
 				</errors>
 			</field>
 
+			<!-- Custom fields. -->
+			<field type="location" handle="location">
+				<label>State / City</label>
+			</field>
+			<field type="bio" handle="bio">
+                <label>About you</label>
+			</field>
+
 			<!-- Dummy error field; this will handle generic errors. -->
 			<field type="error">
 				<errors>
@@ -103,12 +111,12 @@
 		</fields>
 
 		<events>
-			<event handle="members-new" submit-value="Register">
+			<event handle="members-new" submit-value="REGISTER">
 				<messages>
-					<success><p>Registration was successful.</p></success>
-					<error><p>Problems occurred during registration.</p></error>
+					<success><h6>Registration was successful.</h6></success>
+					<error><h6>Problems occurred during registration.</h6></error>
 				</messages>
-				<filter handle="etm-members-send-activation-code">
+				<filter handle="etm-send-activation-code">
 					<messages>
 						<success><p>An email has been sent. If you do not receive it in the next couple of minutes, please inform the webmaster at <a href="mailto:webmaster@example.com">webmaster@example.com</a>.</p></success>
 						<error><p>There was a problem sending your registration email. Please inform the webmaster at <a href="mailto:webmaster@example.com">webmaster@example.com</a>.</p></error>
@@ -123,8 +131,8 @@
 			</event>
 			<event handle="members-edit" submit-value="Save">
 				<messages>
-					<success><p>Your account has been saved.</p></success>
-					<error><p>Problems occurred while saving your account.</p></error>
+					<success><h6>Your account has been saved.</h6></success>
+					<error><h6>Problems occurred while saving your account.</h6></error>
 				</messages>
 				<filter handle="permission">
 					<messages>
@@ -135,8 +143,8 @@
 			</event>
 			<event handle="members-activate-account" submit-value="Activate Account">
 				<messages>
-					<success><p>Activation was successful.</p></success>
-					<error><p>Problems occurred while activating your account.</p></error>
+					<success><h6>Activation was successful.</h6></success>
+					<error><h6>Problems occurred while activating your account.</h6></error>
 				</messages>
 				<filter handle="etm-members-account-activated">
 					<messages>
@@ -145,10 +153,10 @@
 					</messages>
 				</filter>
 			</event>
-			<event handle="members-regenerate-activation-code" submit-value="Request Activation Code">
+			<event handle="members-regenerate-activation-code" submit-value="Request  New Activation Code">
 				<messages>
-					<success><p>A new activation code has been created.</p></success>
-					<error><p>Problems occurred while generating your activation code.</p></error>
+					<success><h6>A new activation code has been created.</h6></success>
+					<error><h6>Generation of new code failed. Please <a href="mailto:admin">contact administrator</a> for solving the situation.</h6></error>
 				</messages>
 				<filter handle="etm-members-resend-activation-code">
 					<messages>
@@ -160,7 +168,7 @@
 			<event handle="member-login-info" submit-value="Log in">
 				<messages>
 					<success><p>You are logged in.</p></success>
-					<error><p>Problems occurred while trying to log you in.</p></error>
+					<error><p>Please check your input:</p></error>
 				</messages>
 			</event>
 			<event handle="members-generate-recovery-code" submit-value="Request Recovery Code">

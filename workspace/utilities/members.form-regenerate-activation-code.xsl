@@ -17,13 +17,15 @@
 		<xsl:with-param name="event" select="$event"/>
 	</xsl:call-template>
 
-	<form action="" method="post">
+	<form action="" method="post" class="normal">
 		<xsl:call-template name="members:input-identity">
 			<xsl:with-param name="event" select="$event"/>
 			<xsl:with-param name="value" select="$url-id"/>
+			<xsl:with-param name="form-element-class" select="'hidden'"/>
 		</xsl:call-template>
 		<xsl:call-template name="members:input-submit">
 			<xsl:with-param name="event" select="$event"/>
+			<xsl:with-param name="class" select="'button'"/>
 		</xsl:call-template>
 	</form>
 

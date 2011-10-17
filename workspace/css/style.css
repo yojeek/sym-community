@@ -45,17 +45,11 @@ blockquote:before, blockquote:after,
 q:before, q:after { content: ""; content: none; }
 
 ins { background-color: #ff9; color: #000; text-decoration: none; }
-
 mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
-
 del { text-decoration: line-through; }
-
 abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
-
 table { border-collapse: collapse; border-spacing: 0; }
-
 hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
-
 input, select { vertical-align: middle; }
 
 
@@ -145,7 +139,12 @@ button {  width: auto; overflow: visible; }
 
 
 /* COMMON TYPOGRAPHY */
-body, select, input, textarea {
+body,  p {
+    color: #222222;
+    font-family: Helvetica, Arial, sans-serif;   
+}
+
+select, input, textarea {
   color: #666666;
   font-family: Helvetica, Arial, sans-serif; 
 }
@@ -163,10 +162,25 @@ h6 {font-size:16px; color:#434343; font-weight:normal; letter-spacing: 1px;}
 a, a:active, a:visited { color: #ff0066; text-decoration:none; font-style:italic;}
 a:hover { color: #ff0066; text-decoration:underline;}
 
+em {font-style:italic;}
+
 .m-4 {margin-bottom:4px;}
 .m-8 {margin-bottom:8px;}
 .m-12 {margin-bottom:12px;}
+.m-20 {margin-bottom:20px;}
 .m-24 {margin-bottom:24px;}
+
+.markdown p {margin-bottom:0px; padding-bottom:6px;}    
+.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 
+    {font-size:16px; color:#434343; font-weight:normal; letter-spacing: 1px; margin-bottom:12px;}
+.markdown ul, .markdown ol 
+    {list-style-position:inside; padding: 6px 0px 12px 0px;}
+    
+.markdown blockquote, .markdown pre
+    {background-color:#E7E7E7; padding:8px 12px 6px 12px; margin:0px 12px 6px 12px;}
+.markdown blockquote  p , .markdown pre  p
+    {padding-bottom:6px;}
+ .markdown pre {background-color:#E7E7E7;}
 
 /**
  * Primary styles
@@ -181,15 +195,101 @@ header {margin-bottom:23px;}
 .main {margin-bottom:60px;}
 
 /* COMMON ELEMENTS */
-.pager {list-style-type:none; overflow:hidden;}
+.pager-holder {overflow:hidden;}
+.pager-holder p {float:left; margin-right:3px; padding:1px 4px 1px 0px;}
+.pager {list-style-type:none; overflow:hidden; float:left;}
 .pager a {color:#666; font-style:normal;}
 .pager a:hover {color:#ff0066;}
 .pager li {float:left; padding:1px 4px; margin-right:3px;}
 .pager li.caption {margin-right:0; padding-left:0;}
-.pager li.active {background-color:#ff0066; color:#fff;}
+.pager li.active {background-color:#ff0066;}
+.pager li.disabled {display:none;}
+.pager li.active a {color:#fff; cursor:default;}
 
-.bg-red {padding:1px 4px; background-color:#ff0066; color:#fff; display:block;}
+ .bg-red {padding:1px 4px; background-color:#ff0066; color:#fff; display:block;}
+ .red {color:#ff0066;}
  
+ .button {-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; 
+    padding: 10px 10px; border:1px solid #CCCCCC; 
+    cursor: pointer;}
+.button.hover {color:#ff0066; }    
+    
+.debug {clear:both; padding-top:20px; color:#888;}
+.debug:hover {color:#222;}
+.debug p {padding-left:12px; }
+.debug code {font-size:12px; }
+.debug pre {padding-top:2px;}
+
+   
+ /* FORMS */
+ div.form-element {clear:left;}
+	div.form-element.required  label {background:url("../img/marker_star.png") right 6px no-repeat;}
+	div.form-element.left   {float:left;}
+	div.form-element.right {clear:none; float:right;}
+	div.form-element.hidden {display:none;}
+	div.form-element input.error {border:1px solid #ff5b5b;}
+	div.form-element input.altered {background:#E2FF71;}
+	div.form-element input.error.altered {background:white;}
+ 
+ form.compact {overflow:hidden;}
+ form.compact input , form.compact textarea, form.compact select
+    {margin-bottom:8px; font-size:12px; background-color:#fff; border:1px solid #CCCCCC; padding: 3px 10px;}           
+    form.compact .inputHint-wrapper span {left:10px; top:4px; font-size:12px; color:#666666;} 
+    form.compact .form-element.right {margin-left:10px;}
+    form.compact label {display:none;}
+
+form.normal {overflow:hidden;}
+form.normal input, form.normal select, form.normal option
+    {margin-bottom:12px; font-size:12px; background-color:#fff; border:1px solid #CCCCCC; padding: 3px 10px;}
+    form.normal label {font-size:14px; margin-bottom:8px; display:block;}
+    form.normal .form-element.right {margin-right:10px;}
+    form.normal .form-element {width:300px;}
+    form.normal .form-element input {width:280px;}
+    form.normal .form-element textarea {width:280px; height:72px;}
+    form.normal .form-element select {width:300px;}
+    form.normal .form-element option {padding:0 10px; border:none;  margin-bottom:3px;}
+
+.validation-summary {margin-bottom:20px;}
+.validation-summary li {list-style-type:none; padding-left:12px; margin-bottom:2px; font-size:14px; color:#666666;}
+.validation-summary h6 {margin-bottom:2px; color:#ff0066;}
+.validation-summary h6 a {color:#222222;}
+.validation-summary p {color:#ff0066; font-size:16px; letter-spacing: 1px; margin-bottom:2px; }
+
+.side-block .validation-summary {margin-bottom:12px;}
+.side-block .validation-summary p {margin-bottom:2px; font-size:12px; color:#ff0066;}
+.side-block .validation-summary li {font-size:12px; padding-left:0px;}
+
+/* MarkItUp customizations*/
+.markItUp {width:540px; margin:0; border:none;}
+.markItUpContainer {border:1px solid #ccc; padding:0px;}
+.markItUpHeader {padding:5px 10px 2px 10px; border-bottom:1px solid #CCCCCC; overflow:hidden;}
+.markItUpEditor   {width:517px; height:144px; border:none; padding:5px 10px; font-size:12px; }
+
+form.normal .form-element .markItUp {margin-bottom:12px;}
+form.normal .markdown-editor-holder.wide .markItUp {width:540px;}
+form.normal .markdown-editor-holder.wide .markItUpEditor {width:518px;}
+form.normal .markdown-editor-holder .markItUp {width:300px;}
+form.normal .markdown-editor-holder .markItUpEditor {width:278px;}
+
+/* LOGIN FORM */
+#login {width:210px;}
+#login .form-element.left input {width:140px;}
+#login .form-element.right {}
+
+#login-submit {background:url("../img/icon_arrow_grey.png") center center no-repeat; padding: 2px 12px;}
+#login-submit.hover {background-image:url("../img/icon_arrow_red.png");}
+#login-forgot {background:url("../img/icon_question_grey.png") center center no-repeat; padding: 2px 12px; height:17px; width:6px;}
+#login-forgot.hover {background-image:url("../img/icon_question_red.png");}
+
+/* REGISTRATION */
+#register .form-element {}
+#register .form-element.hint {height:23px; padding-top:25px; display:table;}
+#register .form-element.hint  p {display:table-cell; vertical-align:middle; line-height:1em; color:#666666;}
+
+#register-submit {background: url("../img/icon_arrow_grey.png")  85px center no-repeat; padding: 2px 24px 2px 12px;}
+#register-submit.hover {background-image: url("../img/icon_arrow_red.png");}
+
+
 /* HEADER */
 #nav-main {padding-top: 5px;}
 #nav-main h6 {white-space: nowrap;}
@@ -202,12 +302,12 @@ header {margin-bottom:23px;}
 #user-info {padding-top: 5px;}
 #user-info p {text-align:right; margin-top:2px;}
 
-/* SIDE */
+/* SIDE -BLOCK*/
 .side {margin-top:17px;}
 
 .side-block {margin-bottom:30px;}
-.side-block h6 {border-bottom:1px solid #cccccc; margin-bottom:10px;}
-.side-block ul {margin-left:10px; list-style: none outside none;}
+.side-block h6 {border-bottom:1px solid #cccccc; margin-bottom:12px;}
+.side-block ul {margin-left:10px;}
 .side-block ul li {margin-bottom:1px;}
 .side-block ul li a {font-style:normal; color:#666666;}
 .side-block ul li a:hover {color:#ff0066;}
@@ -231,14 +331,16 @@ footer {border-top:1px solid #cccccc;  padding-top:10px;}
 
 
 /* MAIN CONTENT */
-.main h1 {border-bottom:1px solid #cccccc; margin-bottom:10px;}
+.main h1 {border-bottom:1px solid #cccccc; margin-bottom:12px;}
+.main h4 {border-bottom:1px solid #cccccc; margin-bottom:4px; margin-top:8px;}
 
-/* FORUM */
+
+/* FORUM THREADS LIST */
 .forum-list {width:100%;}
 .forum-list td {padding:15px 20px 8px 0;  border-bottom:1px solid #dddddd; vertical-align:middle;}
 
 .forum-list .topic {width:380px; vertical-align:top;}
-.forum-list .topic a {color:#333333; font-style:normal;} 
+.forum-list .topic a {color:#333333; font-style:normal; font-size:14px;} 
 .forum-list .topic a:hover {color:#ff0066;} 
 .forum-list .topic .sub {color:#808080; margin-top:1px;} 
     
@@ -252,7 +354,25 @@ footer {border-top:1px solid #cccccc;  padding-top:10px;}
 .forum-list thead td {padding:0px 20px 0px 0;}
 .forum-list thead p {padding:5px 4px; background-color:#e6e6e6; color:#808080; float:left; position:relative; left:-4px;}
   
+/* THREAD VIEW */
+.thread-block {padding:15px 0px 9px 0;  border-bottom:1px solid #dddddd; overflow:hidden; clear:both;}
+.thread-block .message-user-info {width:140px; float:left;}
+.thread-block .message-user-info p {color:#666; margin-bottom:2px;}
+.thread-block .message-user-info a {font-style:normal;}
+.thread-block .message-user-info a.user {color:#ff0066;}
+.thread-block .message-user-info a.user:hover {}
 
+.thread-block h6 {margin:6px 0 12px 0;}
+
+.thread-block .markdown, .thread-block .left
+    {float:left; margin-left:20px; width:540px;}
+
+.thread-block .pager-holder {float:right;}
+.thread-block .validation-summary {margin-bottom:0px;}
+
+.thread-block.thread-reply {margin-top:12px; border:none;}
+.thread-block.thread-reply  h6 {margin:0 0 170px 0;}
+   
 /**
  * Non-semantic helper classes: please define your styles before this section.
  */
@@ -328,4 +448,3 @@ footer {border-top:1px solid #cccccc;  padding-top:10px;}
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3{ page-break-after: avoid; }
 }
-

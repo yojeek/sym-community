@@ -3,7 +3,7 @@
 
 <xsl:template name="navigation">
     <ul>
-        <li class="first"><a href="#">discussion board</a></li>
+        <li class="first"><a href="{$root}/forum/">discussion board</a></li>
         <li><a href="#">personal messaging</a></li>
         <li><a href="#">user-contributed collection</a></li>
         <li class="last"><a href="#">collective blog</a></li>

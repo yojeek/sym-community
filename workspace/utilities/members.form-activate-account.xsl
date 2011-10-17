@@ -18,18 +18,21 @@
 		<xsl:with-param name="event" select="$event"/>
 	</xsl:call-template>
 
-	<form action="" method="post">
+	<form action="" method="post" class="normal m-12">
 		<xsl:call-template name="members:input-identity">
 			<xsl:with-param name="event" select="$event"/>
 			<xsl:with-param name="value" select="$url-id"/>
+            <xsl:with-param name="form-element-class" select="'hidden'"/>
 		</xsl:call-template>
 		<xsl:call-template name="members:input">
 			<xsl:with-param name="field" select="'activation'"/>
 			<xsl:with-param name="event" select="$event"/>
 			<xsl:with-param name="value" select="$url-code"/>
 		</xsl:call-template>
+        <div class="clearfix m-8" />
 		<xsl:call-template name="members:input-submit">
 			<xsl:with-param name="event" select="$event"/>
+			<xsl:with-param name="class" select="'button'"/>
 		</xsl:call-template>
 	</form>
 
