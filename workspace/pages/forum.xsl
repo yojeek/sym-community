@@ -42,7 +42,9 @@
 <xsl:template match="/data/forum-discussions/entry">
     <tr>
         <td class="topic">
-            <p><a href="/forum-discussion/{@id}"><xsl:value-of select="topic"/></a></p>
+            <p>
+                <a href="/forum-discussion/{@id}"><xsl:value-of select="topic"/></a>
+            </p>
             <xsl:choose>
                 <xsl:when test="$forum-category = ''">
                     <p class="sub"><xsl:value-of select="category"/></p>

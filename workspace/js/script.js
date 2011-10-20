@@ -152,6 +152,27 @@ $('document').ready(function() {
         $(".side-block #fields-email").inputHint({hint:'email', wrap: true});
         $(".side-block #fields-password").inputHint({hint:'password', wrap: true});
     }
+
+    if (app.templates.discussion) {
+        var ajaxReadDiscussion = function() {
+            $.ajax({
+                type: 'POST',
+                url: '/async/discussion-read/',
+                data: {
+                    'fields[member]': app.memberId,
+                    'fields[discussion]': app.discussionId
+                },
+                dataType : 'xml',
+                success: function(response) {
+                    if (window.console) window.console.log($(response).find('response'));
+                }
+            });
+        }
+
+        if (app.memberId && app.discussionId) {
+            ajaxReadDiscussion();
+        }
+    }
 });
 
 

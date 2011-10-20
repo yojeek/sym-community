@@ -25,6 +25,20 @@
             </div>
         </xsl:otherwise>
     </xsl:choose>
+
+    <!--
+        pass discussion id or triggering forum-discussion-read event via ajax request
+        if entry already exist, no ajax required
+    -->
+    <script type="text/javascript">
+        app.templates.discussion = true;
+        <xsl:choose>
+            <xsl:when test="/data/forum-discussion-member/entry/discussion/item[@id = $discussion-id]"/>
+            <xsl:otherwise>
+                app.discussionId = <xsl:value-of select="$discussion-id"/>;
+            </xsl:otherwise>
+        </xsl:choose>
+    </script>
 </xsl:template>
 
 <xsl:template name="forum-reply-pagination">
