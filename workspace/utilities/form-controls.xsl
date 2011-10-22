@@ -1032,62 +1032,24 @@ Returns: string
 	<xsl:param name="section"/>
 	<xsl:param name="normalize" select="'yes'"/>
 	<xsl:param name="event" select="$form:event"/>
-	
-	<xsl:variable name="index-key">
-		<xsl:call-template name="form:section-index-key">
-			<xsl:with-param name="section" select="$section"/>
-		</xsl:call-template>
-	</xsl:variable>
-	
-	<xsl:variable name="section-handle">
-		<xsl:call-template name="form:section-handle">
-			<xsl:with-param name="section" select="$section"/>
-		</xsl:call-template>
-	</xsl:variable>
-	
-	<xsl:choose>
-		<xsl:when test="$section!='fields' and $index-key!=''">
-			<xsl:choose>
-				<xsl:when test="$event/entry[@section-handle=$section-handle and @index-key=$index-key]/post-values/*[name()=$handle]/*">
-					<xsl:copy-of select="$event/entry[@section-handle=$section-handle and @index-key=$index-key]/post-values/*[name()=$handle]/*"/>
-				</xsl:when>
-				<xsl:when test="$normalize='yes'">
-					<xsl:value-of select="normalize-space($event/entry[@section-handle=$section-handle and @index-key=$index-key]/post-values/*[name()=$handle])"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="$event/entry[@section-handle=$section-handle and @index-key=$index-key]/post-values/*[name()=$handle]"/>
-				</xsl:otherwise>
-			</xsl:choose>			
-		</xsl:when>
-		<xsl:when test="$section!='fields'">
-			<xsl:choose>
-				<xsl:when test="$event/entry[@section-handle=$section-handle]/post-values/*[name()=$handle]/*">
-					<xsl:copy-of select="$event/entry[@section-handle=$section-handle]/post-values/*[name()=$handle]/*"/>
-				</xsl:when>
-				<xsl:when test="$normalize='yes'">
-					<xsl:value-of select="normalize-space($event/entry[@section-handle=$section-handle]/post-values/*[name()=$handle])"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="$event/entry[@section-handle=$section-handle]/post-values/*[name()=$handle]"/>
-				</xsl:otherwise>
-			</xsl:choose>			
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:for-each select="$event/post-values/*[name()=$handle]">
-				<xsl:choose>
-					<xsl:when test="./*">
-						<xsl:copy-of select="."/>
-					</xsl:when>
-					<xsl:when test="$normalize='yes'">
-						<value><xsl:value-of select="normalize-space(.)"/></value>
-					</xsl:when>
-					<xsl:otherwise>
-						<value><xsl:value-of select="."/></value>
-					</xsl:otherwise>
-				</xsl:choose>				
-			</xsl:for-each>
-		</xsl:otherwise>
-	</xsl:choose>
+
+     
+    <xsl:if test="not($event/@type) or $event/@type != 'created'">
+        <xsl:for-each select="$event/post-values/*[name()=$handle]">
+            <xsl:choose>
+                <xsl:when test="./*">
+                    <xsl:copy-of select="."/>
+                </xsl:when>
+                <xsl:when test="$normalize='yes'">
+                    <value><xsl:value-of select="normalize-space(.)"/></value>
+                </xsl:when>
+                <xsl:otherwise>
+                    <value><xsl:value-of select="."/></value>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
+    </xsl:if>
+
 </xsl:template>
 
 <!--

@@ -8,23 +8,24 @@
 <xsl:import href="../utilities/exsl/exsl.xsl"/>
 <xsl:import href="../utilities/form-controls.xsl"/>
 
-<!-- Define a global variable pointing to your Event -->
-<xsl:variable name="form:event" select="/data/events/forum-new-reply"/>
-
 <xsl:template name="forum-reply">
     <xsl:param name="reply-id" select="''"/>
 
     <div class="thread-block">
-        <xsl:call-template name="form:validation-summary"/>
+        <xsl:call-template name="form:validation-summary">
+            <xsl:with-param name="event" select="/data/events/forum-new-reply"/>
+        </xsl:call-template>
     </div>
     
     <div class="thread-block thread-reply">
-        <form method="post" action="" class="normal">
+        <form method="post" action="" class="normal" id="reply-form">
             <xsl:if test="$reply-id != ''">
-                <input name="id" type="hidden" value="{$reply-id}" />
+                <input name="forum-new-reply[id]" type="hidden" value="{$reply-id}" />
                 <input name="redirect" type="hidden" value="{$root}/forum-discussion/{$discussion-id}" />
             </xsl:if>
             <xsl:call-template name="form:input">
+                <xsl:with-param name="event" select="/data/events/forum-new-reply"/>
+                <xsl:with-param name="section" select="'forum-new-reply'"/>
                 <xsl:with-param name="handle" select="'author'"/>
                 <xsl:with-param name="type" select="'hidden'"/>
                 <xsl:with-param name="value">
@@ -32,6 +33,8 @@
                 </xsl:with-param>
             </xsl:call-template>
             <xsl:call-template name="form:input">
+                <xsl:with-param name="event" select="/data/events/forum-new-reply"/>
+                <xsl:with-param name="section" select="'forum-new-reply'"/>
                 <xsl:with-param name="handle" select="'discussion'"/>
                 <xsl:with-param name="type" select="'hidden'"/>
                 <xsl:with-param name="value">
@@ -45,6 +48,8 @@
             </aside>
             <div class="markdown">
                 <xsl:call-template name="form:textarea">
+                    <xsl:with-param name="event" select="/data/events/forum-new-reply"/>
+                    <xsl:with-param name="section" select="'forum-new-reply'"/>
                     <xsl:with-param name="handle" select="'message'"/>
                     <xsl:with-param name="rows" select="'5'"/>
                     <xsl:with-param name="cols" select="'40'"/>
@@ -52,8 +57,20 @@
                     <xsl:with-param name="value" select="/data/forum-replies/entry[@id = $reply-id]/message[@mode = 'unformatted']"/>
                 </xsl:call-template>
             </div>
+
+            <!--
+                second event : mark discussion as involved by the user, triggers only if first was succesful
+                see event.forum_new_reply.php for details
+            -->
+            <input name="forum-discussion-involved[involved]" type="hidden" value="Yes" />
+            <!-- update entry if exists -->
+            <xsl:apply-templates select="/data/forum-discussion-member/entry[discussion/item/@id = $discussion-id]"/>
         </form>
     </div>
+</xsl:template>
+
+<xsl:template match="/data/forum-discussion-member/entry">
+        <input name="forum-discussion-involved[id]" type="hidden" value="{@id}" />
 </xsl:template>
 
 </xsl:stylesheet>

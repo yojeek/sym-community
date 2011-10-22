@@ -12,7 +12,6 @@
 <xsl:template name="main">
 	<h4><xsl:value-of select="/data/forum-current-discussion/entry/topic"/></h4>
     <xsl:call-template name="forum-reply-pagination"/>
-    <xsl:apply-templates select="/data/forum-current-discussion/entry"/>
     <xsl:apply-templates select="/data/forum-replies/entry"/>
     <xsl:call-template name="forum-reply-pagination"/>
     <xsl:choose>
@@ -25,20 +24,6 @@
             </div>
         </xsl:otherwise>
     </xsl:choose>
-
-    <!--
-        pass discussion id or triggering forum-discussion-read event via ajax request
-        if entry already exist, no ajax required
-    -->
-    <script type="text/javascript">
-        app.templates.discussion = true;
-        <xsl:choose>
-            <xsl:when test="/data/forum-discussion-member/entry/discussion/item[@id = $discussion-id]"/>
-            <xsl:otherwise>
-                app.discussionId = <xsl:value-of select="$discussion-id"/>;
-            </xsl:otherwise>
-        </xsl:choose>
-    </script>
 </xsl:template>
 
 <xsl:template name="forum-reply-pagination">
@@ -55,24 +40,6 @@
             </div>
         </nav>
     </xsl:if>
-</xsl:template>
-
-<!-- TODO: refactor model, remove duplicate rules [see mind map for detail] -->
-<xsl:template match="/data/forum-current-discussion/entry">
-    <div class="thread-block">
-        <aside class="message-user-info">
-            <p><a href="#" class="user"><xsl:value-of select="./author/item"/></a></p>
-            <p><xsl:value-of select="./date-created"/>, <xsl:value-of select="./date-created/@time"/></p>
-            <xsl:choose>
-                <xsl:when test="$member-is-logged-in and $member-id = ./author/item/@id">
-                    <p class="controls"><a href="#">edit</a></p>
-                </xsl:when>
-            </xsl:choose>
-        </aside>
-        <article class="markdown">
-            <xsl:copy-of select="message/*"/>
-        </article>
-    </div>
 </xsl:template>
 
 <xsl:template match="/data/forum-replies/entry">

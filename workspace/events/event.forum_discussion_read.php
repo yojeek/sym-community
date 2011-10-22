@@ -33,44 +33,64 @@
 
 		public static function documentation(){
 			return '
-        <h3>Success and Failure XML Examples</h3>
-        <p>When saved successfully, the following XML will be returned:</p>
-        <pre class="XML"><code>&lt;forum-discussion-read result="success" type="create | edit">
-  &lt;message>Entry [created | edited] successfully.&lt;/message>
-&lt;/forum-discussion-read></code></pre>
-        <p>When an error occurs during saving, due to either missing or invalid fields, the following XML will be returned:</p>
-        <pre class="XML"><code>&lt;forum-discussion-read result="error">
-  &lt;message>Entry encountered errors when saving.&lt;/message>
-  &lt;field-name type="invalid | missing" />
-  ...
-&lt;/forum-discussion-read></code></pre>
-        <h3>Example Front-end Form Markup</h3>
-        <p>This is an example of the form markup you can use on your frontend:</p>
-        <pre class="XML"><code>&lt;form method="post" action="" enctype="multipart/form-data">
-  &lt;input name="MAX_FILE_SIZE" type="hidden" value="5242880" />
-  &lt;input name="fields[discussion]" type="hidden" value="..." />
-  &lt;input name="fields[member]" type="hidden" value="..." />
-  &lt;label>Involved
-    &lt;input name="fields[involved]" type="checkbox" />
-  &lt;/label>
-  &lt;label>Red
-    &lt;input name="fields[red]" type="checkbox" />
-  &lt;/label>
-  &lt;input name="action[forum-discussion-read]" type="submit" value="Submit" />
-&lt;/form></code></pre>
-        <p>To edit an existing entry, include the entry ID value of the entry in the form. This is best as a hidden field like so:</p>
-        <pre class="XML"><code>&lt;input name="id" type="hidden" value="23" /></code></pre>
-        <p>To redirect to a different location upon a successful save, include the redirect location in the form. This is best as a hidden field like so, where the value is the URL to redirect to:</p>
-        <pre class="XML"><code>&lt;input name="redirect" type="hidden" value="http://sym-community.local/success/" /></code></pre>';
+            <p>This event is triggers if: </p>
+            <ol>
+                <li>User is logged in. We look into $_SESSION array to know it.</li>
+                <li>
+                    We are at discussion page. Parsing url data to know this.
+                    [symphony-page] => forum-discussion/<strong>159</strong>
+                </li>
+            </ol>
+            <p>No $_POST data required for this event.</p>
+            ';
 		}
 
 		public function load(){
-			return $this->__trigger();
+            $this->post = $_POST;
+            $page = array();
+
+            if (isset($_GET['symphony-page'])) {
+                $page = explode('/', $_GET['symphony-page']);
+                settype($page[1], 'int');
+            }
+
+            if (isset($_SESSION['sym-members']['id']) & $page[0] == 'forum-discussion' & is_int($page[1])) {
+                $this->post[self::ROOTELEMENT]['member'] = $_SESSION['sym-members']['id'];
+                $this->post[self::ROOTELEMENT]['discussion'] = $page[1];
+                $this->post[self::ROOTELEMENT]['red'] = 'Yes';
+
+                $isExists = $this->isEntryExists($page[1]);
+
+                if ($isExists) {
+                    $this->post[self::ROOTELEMENT]['id'] = $isExists;
+                }
+
+                return $this->__trigger();
+            }
 		}
+
+        // custom function, it is not Symphony API
+        protected function isEntryExists($relation){
+            $entry_manager = new EntryManager(Symphony::Engine());
+
+            $entries = $entry_manager->fetch(null, $this->getSource());
+
+            foreach ($entries as $entry) {
+                $entry_data = $entry->getData();
+                if ($entry_data[38]['relation_id'] == $relation) {
+                    return $entry->get('id');
+                }
+            }
+
+            return false;
+        }
 
 		protected function __trigger(){
-			include(TOOLKIT . '/events/event.section.php');
-			return $result;
-		}
+            unset($_POST['fields']);
+            $_POST['fields'] = $this->post[self::ROOTELEMENT];
+            $_POST['id'] = $this->post[self::ROOTELEMENT]['id'];
 
+            include(TOOLKIT . '/events/event.section.php');
+            return $result;
+		}
 	}

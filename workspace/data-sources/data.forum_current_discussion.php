@@ -3,7 +3,8 @@
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
-		public $dsParamREDIRECTONEMPTY = 'no';
+		public $dsParamREDIRECTONEMPTY = 'yes';
+		public $dsParamREQUIREDPARAM = '$discussion-id';
 		public $dsParamSORT = 'system:id';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';		public $dsParamFILTERS = array(
 				'id' => '{$discussion-id}',
@@ -24,7 +25,7 @@
 					'website' => 'http://sym-community.local',
 					'email' => 'antiplaka@gmail.com'),
 				'version' => '1.0',
-				'release-date' => '2011-10-09T14:11:31+00:00'
+				'release-date' => '2011-10-22T09:10:42+00:00'
 			);
 		}		public function getSource(){
 			return '10';

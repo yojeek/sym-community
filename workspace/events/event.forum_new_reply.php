@@ -28,7 +28,7 @@
 		}
 
 		public static function allowEditorToParse(){
-			return true;
+			return false;
 		}
 
 		public static function documentation(){
@@ -64,13 +64,31 @@
         <pre class="XML"><code>&lt;input name="redirect" type="hidden" value="http://sym-community.local/success/" /></code></pre>';
 		}
 
+
+        public function priority(){
+            return self::kNORMAL;
+        }
+        
 		public function load(){
+            $this->post = $_POST;
 			if(isset($_POST['action']['forum-new-reply'])) return $this->__trigger();
 		}
 
 		protected function __trigger(){
-			include(TOOLKIT . '/events/event.section.php');
-			return $result;
-		}
+            unset($_POST['fields']);
+            $_POST['fields'] = $this->post[self::ROOTELEMENT];
+            $_POST['id'] = $this->post[self::ROOTELEMENT]['id'];
 
+            include(TOOLKIT . '/events/event.section.php');
+
+            // check that this event returned successfully
+            // then execute complimentary event
+            if($result->getAttribute('result') == "success") {
+                $_POST['action']['forum-discussion-involved'] = 'Submit';
+                $_POST['forum-discussion-involved']['member'] = $this->post[self::ROOTELEMENT]['author'];
+                $_POST['forum-discussion-involved']['discussion'] = $this->post[self::ROOTELEMENT]['discussion'];
+            }
+
+            return $result;
+		}
 	}

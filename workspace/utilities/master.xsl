@@ -59,8 +59,10 @@
             var app = {};
             // templates will register themselves in this object
             app.templates = {};
-            // we also need track user id
-            app.memberId = <xsl:value-of select="$member-id"/>
+            <xsl:if test="data/params/member-id">
+                // we also need track user id
+                app.memberId = <xsl:value-of select="$member-id"/>
+            </xsl:if>
         </script>
     </head>
 

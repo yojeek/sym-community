@@ -2,9 +2,9 @@
 
 	require_once(TOOLKIT . '/class.event.php');
 
-	Class eventforum_new_discussion extends Event{
+	Class eventforum_discussion_involved extends Event{
 
-		const ROOTELEMENT = 'forum-new-discussion';
+		const ROOTELEMENT = 'forum-discussion-involved';
 
 		public $eParamFILTERS = array(
 			
@@ -12,19 +12,19 @@
 
 		public static function about(){
 			return array(
-				'name' => 'Forum: New Discussion',
+				'name' => 'Forum: Discussion - Involved',
 				'author' => array(
 					'name' => 'Miki Noidea',
 					'website' => 'http://sym-community.local',
 					'email' => 'antiplaka@gmail.com'),
 				'version' => '1.0',
-				'release-date' => '2011-10-04T16:15:26+00:00',
-				'trigger-condition' => 'action[forum-new-discussion]'
+				'release-date' => '2011-10-18T10:38:21+00:00',
+				'trigger-condition' => 'action[forum-discussion-involved]'
 			);
 		}
 
 		public static function getSource(){
-			return '10';
+			return '11';
 		}
 
 		public static function allowEditorToParse(){
@@ -33,12 +33,12 @@
 
 		public static function documentation(){
 			return '
-			<p>This event is chained with <strong>forum-new-reply</strong></p>
-			';
+        <h3>This event is totally custom.</h3>
+        ';
 		}
 
         public function priority(){
-            return self::kHIGH;
+            return self::kLOW;
         }
 
 		public function load(){
@@ -50,16 +50,12 @@
             unset($_POST['fields']);
             $_POST['fields'] = $this->post[self::ROOTELEMENT];
             $_POST['id'] = $this->post[self::ROOTELEMENT]['id'];
+            
+            $_POST['fields']['red'] = 'Yes';
+            $_POST['field']['involved'] = 'Yes';
 
             include(TOOLKIT . '/events/event.section.php');
-            
-            if($result->getAttribute('result') == "success") {
-                $_POST['action']['forum-new-reply'] = 'Submit';
-                $_POST['forum-new-reply']['discussion'] = $result->getAttribute('id');
-                $_POST['forum-new-reply']['author'] = $this->post[self::ROOTELEMENT]['author'];
-                $_POST['forum-new-reply']['message'] = $this->post[self::ROOTELEMENT]['message'];
-            }
-
-			return $result;
+            return $result;
 		}
+
 	}

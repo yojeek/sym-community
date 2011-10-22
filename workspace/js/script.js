@@ -159,17 +159,27 @@ $('document').ready(function() {
                 type: 'POST',
                 url: '/async/discussion-read/',
                 data: {
-                    'fields[member]': app.memberId,
-                    'fields[discussion]': app.discussionId
+                    'action': 'forum-discussion-read',
+                    'forum-discussion-read[member]': app.memberId,
+                    'forum-discussion-read[discussion]': app.discussionId,
+                    'forum-discussion-read[red]': 'Yes'
                 },
                 dataType : 'xml',
                 success: function(response) {
                     if (window.console) window.console.log($(response).find('response'));
+                    gResponse = $(response);
+                    $("#reply-form").append('<input name="forum-discussion-involved[id]" type="hidden" value="'+$(response).find('response').children(':first').attr('id')+'" />');
+                    $("#reply-form").find('input[type=submit]').removeAttr('disabled');
+                },
+                error: function(response) {
+                    $("#reply-form").find('input[type=submit]').removeAttr('disabled');
                 }
             });
         }
 
         if (app.memberId && app.discussionId) {
+            // it's not in use anymore.
+            // leaving this piece of code just for example of ajax.
             ajaxReadDiscussion();
         }
     }
