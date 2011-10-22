@@ -7,8 +7,8 @@
         <h6>Categories</h6>
         <ul>
             <xsl:choose>
-                <xsl:when test="$category-id = '' and $current-page = 'forum'">
-                    <li class='active'>All categories</li>
+                <xsl:when test="$category-id = '' and ($current-page = 'forum' or $current-page = 'filter')">
+                    <li class='active'><a href="{$root}/forum">All categories</a></li>
                 </xsl:when>
                 <xsl:otherwise>
                     <li><a href="{$root}/forum">All categories</a></li>
@@ -19,16 +19,6 @@
             </xsl:apply-templates>
         </ul>
     </nav>
-    <xsl:choose>
-        <xsl:when test="$member-is-logged-in">
-            <nav class="side-block">
-                <h6>Actions</h6>
-                <ul>
-                    <li><a href="{$root}/forum-new-discussion">Start a new discussion</a></li>
-                </ul>
-            </nav>
-        </xsl:when>
-    </xsl:choose>
 </xsl:template>
 
 <xsl:template match="data/forum-categories/entry">

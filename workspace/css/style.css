@@ -311,7 +311,8 @@ form.normal .markdown-editor-holder .markItUpEditor {width:278px;}
 .side-block ul li {margin-bottom:1px;}
 .side-block ul li a {font-style:normal; color:#666666;}
 .side-block ul li a:hover {color:#ff0066;}
-.side-block ul li.active {color:#ff0066; cursor:default;}
+.side-block ul li.active {color:#ff0066;}
+.side-block ul li.active a {color:#ff0066;}
 
 .user-area li {overflow:hidden;}
 .user-area li span {margin-right:5px; margin-bottom:1px;}

@@ -10,7 +10,8 @@
         <div class="clearfix"/>
         <xsl:choose>
             <xsl:when test="$member-is-logged-in">
-                <p>You are logged in. (<a href="?member-action=logout&amp;redirect={$current-url}">Logout</a>)</p>
+                <p>You are logged in as <strong><xsl:value-of select="/data/member-current/entry/username"/></strong>.</p>
+                <p><a href="?member-action=logout&amp;redirect={$root}">Logout</a></p>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="members-form-login"/>

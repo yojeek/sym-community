@@ -3,6 +3,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:import href="../utilities/form-reply-form.xsl"/>
+<xsl:import href="../utilities/forum-actions.xsl"/>
 <xsl:import href="../utilities/forum-categories.xsl"/>
 <xsl:import href="../utilities/pagination.xsl"/>
 <xsl:import href="../utilities/master.xsl"/>
@@ -61,6 +62,7 @@
 
 <xsl:template name="side-context">
     <xsl:apply-templates select="/data/forum-categories"/>
+    <xsl:call-template name="forum-actions"/>
 </xsl:template>
 
 </xsl:stylesheet>
