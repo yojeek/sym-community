@@ -4,7 +4,7 @@
 		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '{$url-page}';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamSORT = 'system:id';
+		public $dsParamSORT = 'last-active';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';		public $dsParamFILTERS = array(
 				'32' => '{$forum-category}',
 		);		public $dsParamINCLUDEDELEMENTS = array(
@@ -12,7 +12,9 @@
 				'author',
 				'category',
 				'topic',
-				'date-created'
+				'last-active',
+				'last-poster',
+				'number-of-replies'
 		);		public function __construct(&$parent, $env=NULL, $process_params=true){
 			parent::__construct($parent, $env, $process_params);
 			$this->_dependencies = array();
@@ -24,7 +26,7 @@
 					'website' => 'http://sym-community.local',
 					'email' => 'antiplaka@gmail.com'),
 				'version' => '1.0',
-				'release-date' => '2011-10-09T14:15:21+00:00'
+				'release-date' => '2011-10-22T20:10:55+00:00'
 			);
 		}		public function getSource(){
 			return '10';

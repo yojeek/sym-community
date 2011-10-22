@@ -33,41 +33,17 @@
 
 		public static function documentation(){
 			return '
-        <h3>Success and Failure XML Examples</h3>
-        <p>When saved successfully, the following XML will be returned:</p>
-        <pre class="XML"><code>&lt;forum-new-reply result="success" type="create | edit">
-  &lt;message>Entry [created | edited] successfully.&lt;/message>
-&lt;/forum-new-reply></code></pre>
-        <p>When an error occurs during saving, due to either missing or invalid fields, the following XML will be returned:</p>
-        <pre class="XML"><code>&lt;forum-new-reply result="error">
-  &lt;message>Entry encountered errors when saving.&lt;/message>
-  &lt;field-name type="invalid | missing" />
-  ...
-&lt;/forum-new-reply></code></pre>
-        <h3>Example Front-end Form Markup</h3>
-        <p>This is an example of the form markup you can use on your frontend:</p>
-        <pre class="XML"><code>&lt;form method="post" action="" enctype="multipart/form-data">
-  &lt;input name="MAX_FILE_SIZE" type="hidden" value="5242880" />
-  &lt;input name="fields[author]" type="hidden" value="..." />
-  &lt;input name="fields[discussion]" type="hidden" value="..." />
-  &lt;label>Message
-    &lt;textarea name="fields[message]" rows="15" cols="50">&lt;/textarea>
-  &lt;/label>
-  &lt;label>Date Created
-    &lt;input name="fields[date-created]" type="text" />
-  &lt;/label>
-  &lt;input name="action[forum-new-reply]" type="submit" value="Submit" />
-&lt;/form></code></pre>
-        <p>To edit an existing entry, include the entry ID value of the entry in the form. This is best as a hidden field like so:</p>
-        <pre class="XML"><code>&lt;input name="id" type="hidden" value="23" /></code></pre>
-        <p>To redirect to a different location upon a successful save, include the redirect location in the form. This is best as a hidden field like so, where the value is the URL to redirect to:</p>
-        <pre class="XML"><code>&lt;input name="redirect" type="hidden" value="http://sym-community.local/success/" /></code></pre>';
+			<p>This event triggers some other events in chain.</p>
+			<p>They are : <strong>forum-discussion-member</strong> and <strong>forum-discussion-update</strong></p>
+			';
 		}
 
 
         public function priority(){
             return self::kNORMAL;
         }
+
+        public $post = array();
         
 		public function load(){
             $this->post = $_POST;
@@ -82,11 +58,18 @@
             include(TOOLKIT . '/events/event.section.php');
 
             // check that this event returned successfully
-            // then execute complimentary event
+            // then execute chained events event
             if($result->getAttribute('result') == "success") {
+                // data for first event
                 $_POST['action']['forum-discussion-involved'] = 'Submit';
                 $_POST['forum-discussion-involved']['member'] = $this->post[self::ROOTELEMENT]['author'];
                 $_POST['forum-discussion-involved']['discussion'] = $this->post[self::ROOTELEMENT]['discussion'];
+                $_POST['forum-discussion-involved']['involved'] = 'Yes';
+                $_POST['action']['forum-discussion-update'] = 'Submit';
+                // data for second event
+                $_POST['action']['forum-discussion-update'] = 'Submit';
+                $_POST['forum-discussion-update']['id'] = $this->post[self::ROOTELEMENT]['discussion'];
+                $_POST['forum-discussion-update']['last-poster'] = $this->post[self::ROOTELEMENT]['author'];
             }
 
             return $result;

@@ -1034,21 +1034,19 @@ Returns: string
 	<xsl:param name="event" select="$form:event"/>
 
      
-    <xsl:if test="not($event/@type) or $event/@type != 'created'">
-        <xsl:for-each select="$event/post-values/*[name()=$handle]">
-            <xsl:choose>
-                <xsl:when test="./*">
-                    <xsl:copy-of select="."/>
-                </xsl:when>
-                <xsl:when test="$normalize='yes'">
-                    <value><xsl:value-of select="normalize-space(.)"/></value>
-                </xsl:when>
-                <xsl:otherwise>
-                    <value><xsl:value-of select="."/></value>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each>
-    </xsl:if>
+    <xsl:for-each select="$event/post-values/*[name()=$handle]">
+        <xsl:choose>
+            <xsl:when test="./*">
+                <xsl:copy-of select="."/>
+            </xsl:when>
+            <xsl:when test="$normalize='yes'">
+                <value><xsl:value-of select="normalize-space(.)"/></value>
+            </xsl:when>
+            <xsl:otherwise>
+                <value><xsl:value-of select="."/></value>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:for-each>
 
 </xsl:template>
 

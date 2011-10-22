@@ -6,7 +6,6 @@
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamSORT = 'system:id';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';		public $dsParamFILTERS = array(
-				'id' => '{$reply-id}',
 				'37' => '{$discussion-id}',
 		);		public $dsParamINCLUDEDELEMENTS = array(
 				'system:pagination',
@@ -25,7 +24,7 @@
 					'website' => 'http://sym-community.local',
 					'email' => 'antiplaka@gmail.com'),
 				'version' => '1.0',
-				'release-date' => '2011-10-10T07:10:03+00:00'
+				'release-date' => '2011-10-22T19:37:38+00:00'
 			);
 		}		public function getSource(){
 			return '5';

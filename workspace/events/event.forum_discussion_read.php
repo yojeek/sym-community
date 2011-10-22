@@ -58,10 +58,10 @@
                 $this->post[self::ROOTELEMENT]['discussion'] = $page[1];
                 $this->post[self::ROOTELEMENT]['red'] = 'Yes';
 
-                $isExists = $this->isEntryExists($page[1], $_SESSION['sym-members']['id']);
+                $id = $this->isEntryExists($page[1], $_SESSION['sym-members']['id']);
 
-                if ($isExists) {
-                    $this->post[self::ROOTELEMENT]['id'] = $isExists;
+                if ($id) {
+                    $this->post[self::ROOTELEMENT]['id'] = $id;
                 }
 
                 return $this->__trigger();
@@ -70,21 +70,26 @@
 
         // custom function, it is not Symphony API
         protected function isEntryExists($discussionId, $memberId){
-            $entry_manager = new EntryManager(Symphony::Engine());
+            $sql = "
+                SELECT
+                    sym_entries_data_38.entry_id
+                FROM
+                    sym_entries_data_38, sym_entries_data_39
+                WHERE
+                    sym_entries_data_38.relation_id = '{$discussionId}'
+                AND
+                    sym_entries_data_39.relation_id = '{$memberId}'
+                AND
+                    sym_entries_data_38.entry_id = sym_entries_data_39.entry_id
+            ";
 
-            $entries = $entry_manager->fetch(null, $this->getSource());
+            $rows = Symphony::Database()->fetch($sql);
 
-            foreach ($entries as $entry) {
-                $entry_data = $entry->getData();
-/*                    echo '<pre>';
-                    print_r($entry_data);
-                    echo '</pre>';*/
-                if ($entry_data[38]['relation_id'] == $discussionId & $entry_data[39]['relation_id'] == $memberId) {
-                    return $entry->get('id');
-                }
+            if (!empty($rows)) {
+                return $rows[0]['entry_id'];
+            } else {
+                return false;
             }
-
-            return false;
         }
 
 		protected function __trigger(){

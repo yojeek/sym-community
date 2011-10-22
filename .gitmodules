@@ -40,3 +40,6 @@
 [submodule "extensions/databasemanipulator"]
 	path = extensions/databasemanipulator
 	url = https://github.com/yourheropaul/databasemanipulator.git
+[submodule "extensions/datemodified"]
+	path = extensions/datemodified
+	url = https://github.com/czheng/datemodified.git

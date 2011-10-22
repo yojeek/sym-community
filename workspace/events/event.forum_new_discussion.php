@@ -54,6 +54,7 @@
             include(TOOLKIT . '/events/event.section.php');
             
             if($result->getAttribute('result') == "success") {
+                // chained event post initial message as first reply to thread
                 $_POST['action']['forum-new-reply'] = 'Submit';
                 $_POST['forum-new-reply']['discussion'] = $result->getAttribute('id');
                 $_POST['forum-new-reply']['author'] = $this->post[self::ROOTELEMENT]['author'];

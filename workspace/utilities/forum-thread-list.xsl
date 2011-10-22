@@ -65,9 +65,9 @@
                 </xsl:when>
             </xsl:choose>
         </td>
-        <td class="replies"><p>--</p></td>
-        <td class="activity-date"><p>--</p></td>
-        <td class="activity-user"><p>--</p></td>
+        <td class="replies"><p><xsl:value-of select="number-of-replies"/></p></td>
+        <td class="activity-date"><p><xsl:value-of select="last-active"/></p></td>
+        <td class="activity-user"><p><xsl:value-of select="last-poster"/></p></td>
     </tr>
 </xsl:template>
 
