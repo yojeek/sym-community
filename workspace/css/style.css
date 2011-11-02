@@ -210,6 +210,7 @@ header {margin-bottom:23px;}
 
  .bg-red {padding:1px 4px; background-color:#ff0066; color:#fff; display:block;}
  .red {color:#ff0066;}
+ .smaller {font-size:11px;}
  
  .button {-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; 
     padding: 10px 10px; border:1px solid #CCCCCC; 
@@ -364,8 +365,10 @@ footer {border-top:1px solid #cccccc;  padding-top:10px;}
 .thread-block .message-user-info {width:140px; float:left;}
 .thread-block .message-user-info p {color:#666; margin-bottom:2px;}
 .thread-block .message-user-info a {font-style:normal;}
-.thread-block .message-user-info a.user {color:#ff0066;}
-.thread-block .message-user-info a.user:hover {}
+.thread-block .message-user-info a.user {color:#1a1a1a; }
+.thread-block .message-user-info a.user:hover {color:#ff0066; }
+.thread-block .message-user-info a.edit {padding-left:6px;}
+.thread-block .message-user-info a.comment-anchor {color:#666; cursor:pointer;}
 
 .thread-block h6 {margin:6px 0 12px 0;}
 
@@ -376,7 +379,7 @@ footer {border-top:1px solid #cccccc;  padding-top:10px;}
 .thread-block .validation-summary {margin-bottom:0px;}
 
 .thread-block.thread-reply {margin-top:12px; border:none;}
-.thread-block.thread-reply  h6 {margin:0 0 170px 0;}
+.thread-block.thread-reply  h6 {margin:0 0 160px 0;}
    
 /**
  * Non-semantic helper classes: please define your styles before this section.

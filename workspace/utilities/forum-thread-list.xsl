@@ -62,13 +62,24 @@
 
 <xsl:template name="forum-list-entry">
     <xsl:param name="relations" select="/.."/>
-
     <tr>
         <td class="topic">
             <p>
                 <a href="/forum-discussion/{@id}"><xsl:value-of select="topic"/></a>
                 <xsl:if test="$relations and ./number-of-replies != $relations/number-of-replies">
-                    <span class='new-replies'>new: <xsl:value-of select="./number-of-replies - $relations/number-of-replies"/></span>
+                    <a>
+                        <xsl:attribute name="class">
+                            new-replies
+                        </xsl:attribute>
+                        <xsl:attribute name="href">
+                            <xsl:text>/forum-discussion/</xsl:text>
+                            <xsl:value-of select="concat(@id,'/')"/>
+                            <xsl:value-of select="concat('?page=',floor(number($relations/number-of-replies) div 20) + 1)"/>
+                            <xsl:value-of select="concat('#comment-',$relations/number-of-replies+1)"/>
+                        </xsl:attribute>
+                        <xsl:text>new:</xsl:text>
+                        <xsl:value-of select="./number-of-replies - $relations/number-of-replies"/>
+                    </a>
                 </xsl:if>
             </p>
             <xsl:choose>

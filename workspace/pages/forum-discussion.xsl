@@ -9,6 +9,8 @@
 <xsl:import href="../utilities/master.xsl"/>
 
 <xsl:variable name="member-is-logged-in" select="boolean(//events/member-login-info/@logged-in = 'yes')"/>
+<xsl:variable name="starting-comment-number" select="(number(/data/forum-replies/pagination/@current-page) - 1) * number(/data/forum-replies/pagination/@entries-per-page) - 1"/>
+
 
 <xsl:template name="main">
 	<h4><xsl:value-of select="/data/forum-current-discussion/entry/topic"/></h4>
@@ -44,15 +46,23 @@
 </xsl:template>
 
 <xsl:template match="/data/forum-replies/entry">
+    <xsl:variable name="comment-number" select="$starting-comment-number + position()"/>
+    <a name="comment-{$comment-number}"/>
     <div class="thread-block">
         <aside class="message-user-info">
             <p><a href="{$root}/members-profile/{./author/item/@id}" class="user"><xsl:value-of select="./author/item"/></a></p>
             <p><xsl:value-of select="./date-created"/>, <xsl:value-of select="./date-created/@time"/></p>
-            <xsl:choose>
-                <xsl:when test="$member-is-logged-in and $member-id = ./author/item/@id">
-                    <p class="controls"><a href="{$root}/forum-reply/{$discussion-id}/{@id}">edit</a></p>
-                </xsl:when>
-            </xsl:choose>
+            <p class="smaller">
+                <a class="comment-anchor" href="#comment-{$comment-number}">
+                    <xsl:text>comment #</xsl:text>
+                    <xsl:value-of select="$comment-number"/>
+                </a>
+                <xsl:choose>
+                    <xsl:when test="$member-is-logged-in and $member-id = ./author/item/@id">
+                        <a class="edit" href="{$root}/forum-reply/{$discussion-id}/{@id}">edit</a>
+                    </xsl:when>
+                </xsl:choose>
+            </p>
         </aside>
         <article class="markdown">
             <xsl:copy-of select="message/*"/>
