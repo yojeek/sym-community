@@ -26,7 +26,7 @@
 					'website' => 'http://sym-community.local',
 					'email' => 'antiplaka@gmail.com'),
 				'version' => '1.0',
-				'release-date' => '2011-10-22T20:10:55+00:00'
+				'release-date' => '2011-11-02T11:05:49+00:00'
 			);
 		}		public function getSource(){
 			return '10';

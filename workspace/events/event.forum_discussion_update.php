@@ -56,6 +56,10 @@
             unset($_POST['fields']);
             $_POST['fields'] = $this->post[self::ROOTELEMENT];
             $_POST['id'] = $this->post[self::ROOTELEMENT]['id'];
+
+            $date = new DateTime('now');
+            $_POST['fields']['last-active'] = $date->format('d F Y H:i');
+            
             if (!isset($_POST['fields']['number-of-replies']))
                 $_POST['fields']['number-of-replies'] = 0;
 

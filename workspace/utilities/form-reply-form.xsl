@@ -62,9 +62,6 @@
                 complimentary events triggers only if first was succesful
                 see event.forum_new_reply.php for details
             -->
-            <!-- forum-discussion-member : update entry if exists -->
-            <xsl:apply-templates select="/data/forum-discussion-member/entry[discussion/item/@id = $discussion-id]"/>
-            <!-- update activity data for discussion -->
             <xsl:variable name="new-number-of-replies">
                 <xsl:choose>
                     <xsl:when test="$reply-id != ''">
@@ -75,6 +72,10 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
+            <!-- forum-discussion-member : update entry if exists -->
+            <xsl:apply-templates select="/data/forum-discussion-member/entry[discussion/item/@id = $discussion-id]"/>
+            <!-- update activity data for discussion -->
+            <input name="forum-discussion-involved[number-of-replies]" type="hidden" value="{$new-number-of-replies}"/>
             <input name="forum-discussion-update[number-of-replies]" type="hidden" value="{$new-number-of-replies}"/>
         </form>
     </div>

@@ -16,22 +16,6 @@
 	</xsl:call-template>
 
 	<form action="" method="post" class="compact m-4" id="login">
-
-<!--        <div class="form-element left">
-            <input id="login-email" type="text" name="fields[email]"/>
-        </div>
-        <div class="form-element right">
-            <input id="login-submit" type="submit" value="" class="button" name="member-action[login]"/>
-        </div>
-        <div class="form-element left">
-            <input id="login-password" type="password" name="fields[password]"/>
-        </div>
-        <div class="form-element right">
-            <div id="login-forgot" class="button" />
-        </div>-->
-
-        <!-- our custom login form is little bit too custom -->
-        
         <xsl:call-template name="members:input-identity">
 			<xsl:with-param name="event" select="$event"/>
             <xsl:with-param name="form-element-class" select="'left'"/>

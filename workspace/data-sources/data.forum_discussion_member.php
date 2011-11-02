@@ -4,13 +4,16 @@
 		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
+		public $dsParamREQUIREDPARAM = '$member-id';
 		public $dsParamSORT = 'system:id';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';		public $dsParamFILTERS = array(
+				'38' => '{$discussion-id}',
 				'39' => '{$member-id}',
 		);		public $dsParamINCLUDEDELEMENTS = array(
 				'discussion',
+				'red',
 				'involved',
-				'red'
+				'number-of-replies'
 		);		public function __construct(&$parent, $env=NULL, $process_params=true){
 			parent::__construct($parent, $env, $process_params);
 			$this->_dependencies = array();
@@ -22,7 +25,7 @@
 					'website' => 'http://sym-community.local',
 					'email' => 'antiplaka@gmail.com'),
 				'version' => '1.0',
-				'release-date' => '2011-10-18T12:57:02+00:00'
+				'release-date' => '2011-11-01T16:33:57+00:00'
 			);
 		}		public function getSource(){
 			return '11';

@@ -34,10 +34,9 @@
 		public static function documentation(){
 			return '
 			<p>This event triggers some other events in chain.</p>
-			<p>They are : <strong>forum-discussion-member</strong> and <strong>forum-discussion-update</strong></p>
+			<p>They are : <strong>forum-discussion-involved</strong> and <strong>forum-discussion-update</strong></p>
 			';
 		}
-
 
         public function priority(){
             return self::kNORMAL;
@@ -60,12 +59,13 @@
             // check that this event returned successfully
             // then execute chained events event
             if($result->getAttribute('result') == "success") {
+
                 // data for first event
                 $_POST['action']['forum-discussion-involved'] = 'Submit';
                 $_POST['forum-discussion-involved']['member'] = $this->post[self::ROOTELEMENT]['author'];
                 $_POST['forum-discussion-involved']['discussion'] = $this->post[self::ROOTELEMENT]['discussion'];
                 $_POST['forum-discussion-involved']['involved'] = 'Yes';
-                $_POST['action']['forum-discussion-update'] = 'Submit';
+
                 // data for second event
                 $_POST['action']['forum-discussion-update'] = 'Submit';
                 $_POST['forum-discussion-update']['id'] = $this->post[self::ROOTELEMENT]['discussion'];

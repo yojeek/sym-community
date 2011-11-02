@@ -31,15 +31,3 @@
 [submodule "workspace/utilities/members-forms"]
 	path = workspace/utilities/members-forms
 	url = git@github.com:yojeek/members-forms.git
-[submodule "extensions/eventex"]
-	path = extensions/eventex
-	url = https://github.com/yourheropaul/eventex.git
-[submodule "extensions/asdc"]
-	path = extensions/asdc
-	url = https://github.com/pointybeard/asdc.git
-[submodule "extensions/databasemanipulator"]
-	path = extensions/databasemanipulator
-	url = https://github.com/yourheropaul/databasemanipulator.git
-[submodule "extensions/datemodified"]
-	path = extensions/datemodified
-	url = https://github.com/czheng/datemodified.git

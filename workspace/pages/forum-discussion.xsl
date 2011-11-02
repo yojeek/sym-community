@@ -46,7 +46,7 @@
 <xsl:template match="/data/forum-replies/entry">
     <div class="thread-block">
         <aside class="message-user-info">
-            <p><a href="#" class="user"><xsl:value-of select="./author/item"/></a></p>
+            <p><a href="{$root}/members-profile/{./author/item/@id}" class="user"><xsl:value-of select="./author/item"/></a></p>
             <p><xsl:value-of select="./date-created"/>, <xsl:value-of select="./date-created/@time"/></p>
             <xsl:choose>
                 <xsl:when test="$member-is-logged-in and $member-id = ./author/item/@id">

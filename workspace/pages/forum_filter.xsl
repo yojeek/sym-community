@@ -19,8 +19,10 @@
 
 <xsl:template name="side-context">
     <xsl:apply-templates select="data/forum-categories"/>
-    <xsl:call-template name="forum-filter"/>
-    <xsl:call-template name="forum-actions"/>
+    <xsl:if test="/data/events/member-login-info/@logged-in = 'yes'">
+        <xsl:call-template name="forum-filter"/>
+        <xsl:call-template name="forum-actions"/>
+    </xsl:if>
 </xsl:template>
 
 </xsl:stylesheet>

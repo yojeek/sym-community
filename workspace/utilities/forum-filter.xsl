@@ -9,6 +9,7 @@
             seems that i fell in some trap with url parameters
             TODO find more elegant solution for url rewrite patterns
         -->
+        
         <xsl:variable name="path-pattern">
             <xsl:choose>
                 <xsl:when test="$current-page = 'filter' or ($current-page = 'forum' and $forum-category = '')">
@@ -19,6 +20,7 @@
                 </xsl:when>
             </xsl:choose>
         </xsl:variable>
+
         <ul>
             <xsl:choose>
                 <xsl:when test="$forum-filter = 'read'">

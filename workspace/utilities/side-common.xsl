@@ -9,9 +9,13 @@
         <h6>User area</h6>
         <div class="clearfix"/>
         <xsl:choose>
-            <xsl:when test="$member-is-logged-in">
+            <xsl:when test="/data/member-current/entry">
                 <p>You are logged in as <strong><xsl:value-of select="/data/member-current/entry/username"/></strong>.</p>
-                <p><a href="?member-action=logout&amp;redirect={$root}">Logout</a></p>
+                <p><a href="{$root}/members-profile/{$member-id}">View profile</a> or <a href="?member-action=logout&amp;redirect={$root}">logout</a>.</p>
+            </xsl:when>
+            <xsl:when test="/data/params/member-id">
+                <p>You are logged in.</p>
+                <p><a href="{$root}/members-profile/{$member-id}">View profile</a> or <a href="?member-action=logout&amp;redirect={$root}">logout</a>.</p>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="members-form-login"/>

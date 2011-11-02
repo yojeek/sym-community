@@ -21,7 +21,7 @@
 			See members.form-edit-account.xsl
 		-->
 		<datasources>
-			<member handle="members-1-by-member-id"/>
+			<member handle="member-current"/>
 		</datasources>
 
 		<fields>
