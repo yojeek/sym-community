@@ -89,7 +89,7 @@
             </xsl:choose>
         </td>
         <td class="replies"><p><xsl:value-of select="number-of-replies"/></p></td>
-        <td class="activity-date"><p><xsl:value-of select="last-active"/></p></td>
+        <td class="activity-date"><p><xsl:value-of select="last-active"/><br/><xsl:value-of select="last-active/@time"/></p></td>
         <td class="activity-user">
             <p><a href="{$root}/members-profile/{last-poster/item/@id}"><xsl:value-of select="last-poster"/></a></p>
         </td>

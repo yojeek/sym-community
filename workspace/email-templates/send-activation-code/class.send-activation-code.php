@@ -22,6 +22,6 @@ Class Send_activation_codeEmailTemplate extends EmailTemplate{
 			'website' => 'http://sym-community.local',
 			'email' => 'antiplaka@gmail.com'
 		),
-		'release-date' => '2011-11-01T19:17:21+00:00'
+		'release-date' => '2011-11-05T22:25:38+00:00'
 	);	
 }

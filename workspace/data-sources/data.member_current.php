@@ -10,7 +10,8 @@
 				'id' => '{$member-id}',
 		);		public $dsParamINCLUDEDELEMENTS = array(
 				'username',
-				'email'
+				'email',
+				'role'
 		);		public function __construct(&$parent, $env=NULL, $process_params=true){
 			parent::__construct($parent, $env, $process_params);
 			$this->_dependencies = array();
@@ -22,7 +23,7 @@
 					'website' => 'http://sym-community.local',
 					'email' => 'antiplaka@gmail.com'),
 				'version' => '1.0',
-				'release-date' => '2011-11-01T16:33:10+00:00'
+				'release-date' => '2011-11-05T20:26:30+00:00'
 			);
 		}		public function getSource(){
 			return '2';

@@ -7,7 +7,8 @@
 		const ROOTELEMENT = 'members-new';
 
 		public $eParamFILTERS = array(
-			'member-lock-activation',
+			'member-lock-role',
+				'member-lock-activation',
 				'etm-send-activation-code'
 		);
 
@@ -19,7 +20,7 @@
 					'website' => 'http://sym-community.local',
 					'email' => 'antiplaka@gmail.com'),
 				'version' => '1.0',
-				'release-date' => '2011-09-30T06:30:33+00:00',
+				'release-date' => '2011-11-05T21:56:51+00:00',
 				'trigger-condition' => 'action[members-new]'
 			);
 		}
@@ -72,6 +73,12 @@
   &lt;/fieldset>
   &lt;label>Activation
     &lt;input name="fields[activation]" type="text" />
+  &lt;/label>
+  &lt;label>Role
+    &lt;select name="fields[role]">
+      &lt;option value="1">Public&lt;/option>
+      &lt;option value="2">Authorized&lt;/option>
+    &lt;/select>
   &lt;/label>
   &lt;label>Location
     &lt;input name="fields[location]" type="text" />
