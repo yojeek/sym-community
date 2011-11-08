@@ -17,38 +17,11 @@
     </xsl:choose>
 </xsl:template>
 
-<xsl:template match="archive">
-  <xsl:apply-templates select="year"/>
-</xsl:template>
-
-<xsl:template match="year">
-    <!-- "." means 'current node', in that case it is year -->
-    <xsl:value-of select="."/>
-    <ul>
-        <xsl:apply-templates select="month"/>
-    </ul>
-</xsl:template>
-
-<xsl:template match="year/month">
-    <li>
-        <xsl:value-of select="."/>
-        <ul>
-            <xsl:apply-templates select="./article"/>
-        </ul>
-    </li>
-</xsl:template>
-
-<xsl:template match="year/month/article">
-    <li>
-        <xsl:value-of select="."/>
-    </li>
-</xsl:template>
-
 <xsl:template name="profile-view">
     <div class="markdown">
         <h6>
             <xsl:value-of select="/data/member-profile/entry/username"/>
-            <xsl:if test="$profile-member-id = /data/params/member-id">
+            <xsl:if test="/data/params/member-id and $profile-member-id = /data/params/member-id">
                 <xsl:text>&#160;&#160;</xsl:text>
                 <a class='inline' href='{$root}/members-profile/'>edit profile.</a>
             </xsl:if>

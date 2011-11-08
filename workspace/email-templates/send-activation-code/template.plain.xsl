@@ -16,7 +16,7 @@
     Follow this link to activate your membership:
 
     <xsl:text>http://sym-community.local/activate?code=</xsl:text>
-    <xsl:value-of select="concat(/data/member-just-created/entry/activation/code, '&#160;', 'id=',  /data/member-just-created/entry/email) " disable-output-escaping="yes"/>
+    <xsl:value-of select="concat(/data/member-just-created/entry/activation/code, '&amp;', 'id=',  /data/member-just-created/entry/email) " disable-output-escaping="yes"/>
 
     Thank you!
 </xsl:template>
