@@ -1,6 +1,6 @@
 <?php
 
-	if(!function_exists('processRecordGroup')){
+	if(!function_exists('processRecordGroup')) {
 		function processRecordGroup(&$wrapper, $element, $group, $ds, &$entryManager, &$fieldPool, &$param_pool, $param_output_only=false){
 			$associated_sections = NULL;
 
